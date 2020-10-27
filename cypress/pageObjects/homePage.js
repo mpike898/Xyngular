@@ -3,7 +3,6 @@ export default class homePage {
     visit() {
         cy.visit('http://the-internet.herokuapp.com/dynamic_content');
     }
-
     images(testOp) {
         const imageOne = '(//div[contains(@class,"large-2")])[1]/img'
         const imageTwo = '(//div[contains(@class,"large-2")])[2]/img'
@@ -14,7 +13,6 @@ export default class homePage {
         const textBoxThree = '(//div[contains(@class,"large-10")])[4]'
         const marioImg = '/img/avatars/Original-Facebook-Geek-Profile-Avatar-1.jpg'
         var i = 0;
-
         cy.xpath(imageOne).invoke('attr', 'src').then((firstSrc) => {
             const srcValue1 = firstSrc
             cy.xpath(imageTwo).invoke('attr', 'src').then((secondSrc) => {
@@ -31,22 +29,19 @@ export default class homePage {
                         for (i = 0; i < 3; i++) {
                             if (srcValueArray[i] === wolvImg) {
 
-                                switch(i) {
+                                switch (i) {
                                     case 0:
-                                        cy.xpath(textBoxOne).invoke('text').should('not.contain','magni', { matchCase: false })
-                                    break; 
+                                        cy.xpath(textBoxOne).invoke('text').should('not.contain', 'magni', { matchCase: false })
+                                        break;
                                     case 1:
-                                        cy.xpath(textBoxTwo).invoke('text').should('not.contain','magni', { matchCase: false })
-                                    break; 
+                                        cy.xpath(textBoxTwo).invoke('text').should('not.contain', 'magni', { matchCase: false })
+                                        break;
                                     case 2:
-                                        cy.xpath(textBoxThree).invoke('text').should('not.contain','magni', { matchCase: false })
-                                    break; 
+                                        cy.xpath(textBoxThree).invoke('text').should('not.contain', 'magni', { matchCase: false })
+                                        break;
                                     default:
-                                      // code block
-                                  }
-                      
-                                //expect(textBoxOne).to.not.have.text("magni")
-                                //return textBoxOne
+                                    // code block
+                                }
                             }
                         }
                     }
@@ -65,7 +60,7 @@ export default class homePage {
                             }
                             refreshCounter++;
                             if (refreshCounter === 5) {
-                                throw new Error("test fails here")
+                                throw new Error("Maximum refreshes reached without seeing mario enough :(")
                             }
                             cy.reload()
                         }
@@ -73,7 +68,6 @@ export default class homePage {
                 });
             });
         });
-
     }
     loremIpsum() {
         cy.xpath('(//div[contains(@class,"large-10")])[1]').invoke('text').then((text) => {
@@ -92,31 +86,24 @@ export default class homePage {
                 expect(textValue).to.contain(word)
                 //expect(word).to.equal(str[i])
             }
-            if(str.length === numWords){
-
-            
-            for (var i = 0; i < str.length; i++) {
-                if (word === str[i]) {
-                    dupe++;
-                    if (dupe >= 2) {
-                        throw new Error("Duplicate Word")
+            if (str.length === numWords) {
+                for (var i = 0; i < str.length; i++) {
+                    if (word === str[i]) {
+                        dupe++;
+                        if (dupe >= 2) {
+                            throw new Error("Duplicate Word")
+                        }
                     }
-
                 }
             }
-            }
-            //cy.contains(word).next('div').contains(word).should('exist')
-            //cy.xpath('(//div[contains(@class,"large-10")])[1]').contains(word).should('have.length', 1)
         });
-        
     }
-
 }
 
 
 
-        
-        
-    
+
+
+
 
 
